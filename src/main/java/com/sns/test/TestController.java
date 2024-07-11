@@ -39,6 +39,7 @@ public class TestController {
 		return "test/test";
 	}
 	
+	@ResponseBody
 	@GetMapping("/test4")
 	public List<Map<String, Object>> test4() {
 		return postMapper.selectPostListTest();
