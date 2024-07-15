@@ -1,0 +1,286 @@
+240401
+1_java_Day10
+
+기본 자료형(Primitive type)
+int, char, boolean, double, long....
+
+참조 자료형(Reference type)
+String, int[], int[][], char[][]...
+
+---------------------------------------------------
+240422
+2_front_end_Day03
+
+주소
+
+절대경로 : 전체경로를 다 표시 '/'로 시작 
+상대경로 : 상대의 경로를 기준으로 표시 '/'가 앞에 붙지 않음
+
+---------------------------------------------------------------------
+240424
+2_front_end_Day05
+
+CDN 서버
+: 정적파일만 모아서 올리는 서버
+
+static(고정, 정적) 파일
+- 이미지
+- CSS
+- JS
+
+-------------------------------------------------------
+240430
+2_front_end_Day08
+
+컴파일 언어 : JAVA
+> 통째로 읽어들임
+
+인터프리터 언어: Javascript
+> 한줄한줄씩 읽어들임
+
+============================================= DB 
+2024-05-10
+Mysql 설치
+- Mysql DB 서버 (필수)
+- Mysql Workbench 프로그램 (필수)
+- command line (필수X)
+- Sample database (필수X)
+
+2024-05-13
+CRUD
+Create => Insert문
+Read => select문
+
+2024-05-17
+클러스터드 인덱스 vs 논 클러스터드 인덱스 
+클러스터드 : pk id
+논 클러스터드 : pk 이외의 index
+
+================================================ servlet
+2024-05-22
+HTML 태그 - W3C에서 만들어진 태그를 사용
+XML - 데이터 담는 용도 (만들어서 사용 가능)
+ex) 
+<users>
+  <user>
+    <name>신보람</name>
+    <age>35</age>
+  </user>
+  <user>
+    <name>김바다</name>
+    <age>6</age>
+  </user>  
+</users>
+
+웹 패키지 구조
+marondal.com
+> com.marondal (역순으로 만드는것이 관례)
+
+상태 번호(status code 번호)
+404 page not found
+: 서버(자바코드)에 요청을 했는데 도달하지 못함
+405 : request method 불일치 (post로 요청할 경우 많이 발생함)
+200 ok(성공)  201 created  -- 200대는 성공
+500 server internal error
+: 서버에는 도달했는데 자바코드에 문제가 있어서 오류발생
+ > eclipse의 console 로그를 확인한다.
+ > debugging을 걸어서 확인한다
+
+---------------------------------------------
+2024-05-24
+웹 요청 방식(Request Method)
+1) GET : request body를 사용하지 않는다. 쿼리스트링이 있을 수 있다.
+- 브라우저로 주소 치고 접속
+- a 태그를 통해 접속
+- form 태그를 통해 접속
+2) POST > 24/05/27
+ : request body에 parameter를 넘김_(보여지면 안되는 값을)insert받을때 사용 > 왜냐하면, 쿼리스트링이 안보임
+- form 태그 method="post"
+
+Query String : 주소뒤에 request parameter를 붙이는 것
+> path?key=value (추가할때는 &)
+ex) /lesson01/ex03?user_id=marobiana&name=신보람&age=20
+
+JSON(JavaScript Object Notation) String
+형식: [{"name":"신보람", "age":"30"}, {"name":"김바다", "age":"6"}]
+
+============================================ git
+2024.05.28 github
+로컬 -> 개발계(dev) -> stage(실제 올리기 전, 테스트하는 환경) -> Real 환경
+<------개발DB------> <------realDB------>
+
+stage : commit(등록)
+-> 커밋하고 싶지않은 파일의 경우 .gitignore(오타주의) 로 관리
+    다만, 한번이라도 커밋을 한 파일의 경우 .gitignore에 등록을 해도 소용이 없음(계속 추적 됨)
+    그러므로 처음부터 관리하고싶지 않은 파일은 구분을 잘 해야함
+
+브랜치간 이동을 할 때는 커밋할것이 없어야함
+
+develop에 있는것을 master로 병합하려고 할때 브랜치의 위치는 'master'에 있어야함
+
+공개키(public key) <-암호화/복호화(둘이 한 쌍)-> 개인키(private key)
+
+* gitHub 주의사항
+커밋 되돌리기 절대 금지 => 잘못했으면, 다시 커밋하기
+develop 브랜치에만 커밋 (master X)
+<충돌방지>
+Sourcetree를 켜면
+1. 무조건 pull부터 받기 -> 코드 작성 -> 커밋 -> push
+* if pull을 못 받은 경우, 
+1) 코드 작성 -> 커밋 -> pull -> push
+2) 코드 작성 -> stash(임시공간) -> pull -> stash 코드 꺼냄 -> 커밋 -> push
+
+---------------------------------------------------------
+2024-06-05
+Singleton 패턴 공부하기
+# eclipse에서 코드에 이상이 없는데, 정상적으로 실행이 안될때는
+   상단의 Project > clean 한 후에, 다시 시도해보기
+
+-----------------------------------------------------------
+2024-06-10 다시한번 정리!
+GET: request body 없음 => query string 구성
+- 브라우저
+- a 태그
+- form 태그
+- redirect 302 => GET
+
+POST
+- form 태그
+
+
+================================================================== spring
+2024-06-10
+.jar 파일 압축푸는법 2가지
+1. 커피모양아이콘 => 더블 클릭하면 압축 자동 풀림
+2. 반디집으로 압축 풀기 => contents.zip => 다시한번 반디집으로 압축풀기
+
+Spring Container
+-> Spring bean(객체) => 객체가 어노테이션으로 만들어짐, heap영역에는 있음. Spring이 관여하는 객체이므로 Spring bean
+                                관리를 Spring이 알아서 해주므로, new로 절대 만들지 않음
+Java bean => 자바 heap영역에 들어있는 객체 new Person(); 과 같은것
+
+------------------------------------------------------------------------------
+2024-06-11
+Spring framework VS Spring boot
+Spring 3.0, 3.2 => '토비의 스프링' 책 추천 
+
+Request    ->    Response
+                  <HttpMessageConverter 클래스>
+                  1) @Controller + @ResponseBody => return String => HTML
+                  2) @Controller + @ResponseBody => return Map => JSON
+   ( 1)과 동일) 3) @RestController => return String => HTML
+   ( 2)와 동일) 4) @RestController => return Map => JSON
+                  5) @RestController => return 객체(ex.내가만든 클래스) => JSON
+
+                  <ViewResolver 클래스>
+                  6) @Controller return String(html 경로 위치) => HTML
+
+@ResponseBody + return String => HttpMessageConverter => HTML
+@ResponseBody + return 객체(Map, 객체, List) => HttpMessageConverter => jackson lib => JSON
+
+------------------------------------------------------------------------------------
+2024-06-12
+src/main/java => java class
+src/main/resources => java 이외의 모든 것, web(html), 설정파일
+
+DTO = VO = model = domain (전부 비슷한 의미로 쓰인다, 수업에서는 domain으로 사용)
+
+--------------------------------------------------------------------------------------
+2024-06-13 
+DB연동(MyBatis)Cycle에서 자주 발생하는 에러 상황
+: 이클립스 콘솔에서 사유 확인하기
+1. SQL 쿼리문 문법이 틀렸을 때 (status=500)
+ > sql 패키지, #이 보이면 xml일 가능성이 크다
+ > TooManyResultsException : 단건으로 설정이 되어있는데 결과는 그것보다 더 많이 나왔을경우
+2. Spring bean을 만드는 어노테이션이 없을때, 또는 @Autowired 누락 (status=500)
+> bean is null => NPE(NullPointException)
+3. xml, mybatis 등 오타 (status=500)
+> Invalid bound statement
+---------------------------------------------------------------------------------------
+2024-06-14
+Bad Request (status=400) : 서버에 도달하지 못함, 파라미터의 잘못이므로 파라미터쪽 확인
+(status=404) : 주소를 잘못 적거나, 잘못 요청했을때
+405 : 메소드 불일치
+
+-------------------------------------------------------------------------------------
+2024-06-18
+Request    ->    Response
+                   @Controller + @ResponseBody return String => HTML
+                   @Controller + @ResponseBody return 객체(도메인 or list) => JSON < AJAX요청은 이방식, Model 사용X
+                   @Controller return String (html 경로) => HTML < Model 사용O
+
+----------------------------------------------------------------------------------------
+2024-06-28
+GET
+POST
+PUT - 수정요청
+PATCH - 수정요청
+DELETE - 삭제요청 
+-----------------------------------------------------------------
+2024-07-02
+lombok이 제대로 적용이 안될때
+1. build.gradle에 lombok 라이브러리 추가
+2. gradle refresh를 했나?
+3. .ini 파일 경로, 한글폴더이지 않은가?
+4. project > build clean
+5. sts 껐다가 다시 열기
+
+======================================================================== spring project
+2024-07-08 
+프로젝트 순서
+기획서 > (일정표) > DB 설계 > URL 설계 > 구현 > 테스트
+MEMO 게시판 - 예제 => 예제는 기획서 생략
+SNS(인스타그램st) - 퀴즈 => 기획서 만들기!!!
+
+-------------------------------------------------------------------
+2024-07-09
+DB설계
+1. 한 컬럼에 값이 여러개가 들어가지 않도록 분리
+2. 한 행은 한 테이블에서 유일해야 함 => 테이블 분리
+3. 테이블에 어울리는 컬럼만 저장
+
+Restful API 설계
+- 옛날: /post-list
+  restful: /posts  GET
+- 옛날: /post-detail?id=13
+   restful: /posts/post/13  GET
+            /posts/post/13  PATCH, PUT
+            /posts/post/13  DELETE
+            /posts/post      POST
+
+클라이언트(웹, ios, android)       서버(백엔드)
+
+@RequestMapping
+@GetMapping
+@RequestParam
+Swagger
+
+----------------------------------------------------------------------
+2024-07-10
+STS 설치 후 테스트
+@ResponseBody return String "문장" => HTML
+@ResponseBody return Map => JSON
+HTML 화면 확인(타임리프)   application.yml
+DB 연동(MyBatis) + p6spy 추가
+
+메모: com.memo            post:myBatis     user:JPA
+sns:  com.sns                 user/post:JPA     comment/like:myBatis
+
+----------------------------------------------------------------------------
+2024-07-11
+defaultLayout.html  전체페이지(조각 합쳐짐)
+
+공통 조각 페이지
+header.html
+footer.html
+
+user 조각 페이지
+signUp.html 회원가입
+signIn.html  로그인
+---------------------------------------------------------------
+2024-07-15
+
+JSessionId : 서버에 처음 접속하면, 서버가 쿠키에 정보를 저장하고, id를 발급해 줌
+               session 주머니가 사라질때(로그아웃하거나, 서버운영자가 설정한 시간내)까지 추가인증없이 이 정보로 사용가능
+               session 주머니가 사라지면, 새로 인증(로그인)을 해야 사용할수있음
+               유저에 대한 간략한 정보들만 담아야한다.
