@@ -70,7 +70,7 @@ public class UserRestController {
 	public Map<String, Object> signIn(
 			@RequestParam("loginId") String loginId,
 			@RequestParam("passowrd") String password,
-			HttpServletRequest request) {
+			HttpSession session) {
 		
 		// password hashing
 		String hashedPassword = EncryptUtils.md5(password);
@@ -78,22 +78,21 @@ public class UserRestController {
 		// db 조회 => loginId, hashing 된 비밀번호 => UserEntity
 		UserEntity user = userBO.getUserEntityByLoginIdPassword(loginId, hashedPassword);
 		
-		// 로그인 처리 및 응답값
+		// 응답값
 		Map<String, Object> result = new HashMap<>();
 		if (user != null) { // 성공
-			// 세션에 사용자 정보를 담는다 (사용자 각각마다)
-			HttpSession session = request.getSession();
+			// 로그인 처리
+			// 로그인 정보를 세션에 담는다.(사용자 마다)
 			session.setAttribute("userId", user.getId());
 			session.setAttribute("userLoginId", user.getLoginId());
 			session.setAttribute("userName", user.getName());
 			
 			result.put("code", 200);
 			result.put("result", "성공");
-		} else { // 실패
+		} else { // 로그인 불가
 			result.put("code", 403);
 			result.put("error_message", "존재하지 않는 사용자입니다.");
 		}
-		
 		return result;
 	}
 }
