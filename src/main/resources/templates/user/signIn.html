@@ -34,7 +34,7 @@
     <script>
     	$(document).ready(function() {
     		// 로그인 버튼을 클릭 또는 엔터
-    		$("form").on('submit', function(e) {
+    		$("#loginForm").on('submit', function(e) {
     			e.preventDefault(); 
     			//alert("로그인");
     			
@@ -61,7 +61,7 @@
     			.done(function(data) { // response
     				if (data.result == "성공") {
     					// 타임라인 화면으로 이동
-    					//location.href = "/timeline/timeline-view";
+    					location.href = "/timeline/timeline-view";
     				} else {
     					alert(data.error_message);
     				}

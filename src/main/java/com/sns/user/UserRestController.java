@@ -69,7 +69,7 @@ public class UserRestController {
 	@PostMapping("/sign-in")
 	public Map<String, Object> signIn(
 			@RequestParam("loginId") String loginId,
-			@RequestParam("passowrd") String password,
+			@RequestParam("password") String password,
 			HttpSession session) {
 		
 		// password hashing
