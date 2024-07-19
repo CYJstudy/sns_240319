@@ -7,8 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.sns.comment.bo.CommentBO;
+import com.sns.comment.domain.Comment;
 import com.sns.post.bo.PostBO;
 import com.sns.post.entity.PostEntity;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class TimelineController {
@@ -27,4 +31,5 @@ public class TimelineController {
 		
 		return "timeline/timeline";
 	}
+	
 }
