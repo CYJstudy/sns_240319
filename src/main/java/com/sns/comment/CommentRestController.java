@@ -47,8 +47,16 @@ public class CommentRestController {
 	
 	@DeleteMapping("/delete")
 	public Map<String, Object> delete(
-			@RequestParam("commentId") String commentId) {
+			@RequestParam("commentId") int commentId) {		
 		
+		// db delete
+		commentBO.deleteComment(commentId);
+		
+		// 응답값
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("result", "성공");
+		return result;
 	}
 	
 }

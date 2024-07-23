@@ -20,6 +20,12 @@ public class CommentBO {
 	
 	@Autowired
 	private UserBO userBO;
+	
+	// input: commentId
+	// output: X
+	public void deleteComment(int commentId) {
+		commentMapper.deleteCommentByCommentId(commentId);
+	}
 
 	// input: 파라미터들(postId, userId, content)
 	// output: X
