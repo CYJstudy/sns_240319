@@ -45,10 +45,10 @@
 				<!-- 좋아요 -->
 				<div class="card-like m-3">
 					<a href="#" class="like-btn" th:data-user-id="${session.userId}" th:data-post-id="${cardView.post.id}">
-						<img src="https://www.iconninja.com/files/214/518/441/heart-icon.png" th:if="${cardView.filledLike != true}" width="18" height="18" alt="empty heart">
-						<img src="https://www.iconninja.com/files/352/685/147/heart-icon.png" th:unless="${cardView.filledLike != true}" width="18" height="18" alt="full heart">
+						<img th:if="${cardView.filledLike != true}" src="https://www.iconninja.com/files/214/518/441/heart-icon.png" width="18" height="18" alt="empty heart">
+						<img th:unless="${cardView.filledLike != true}" src="https://www.iconninja.com/files/352/685/147/heart-icon.png" width="18" height="18" alt="full heart">
 					</a>
-					<span th:text="${cardView.likeCount} + 개">13</span>
+					<span th:text="|좋아요 ${cardView.likeCount}개|">13</span>
 				</div>
 				
 				<!-- 글 -->

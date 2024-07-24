@@ -30,8 +30,9 @@ public class TimelineBO {
 	@Autowired
 	private LikeBO likeBO;
 	
-	// input: X   output: List<CardView>
-	public List<CardView> generateCardViewList() {
+	// input: X => userId(좋아요를 확인할 때 로그인 된 사람 Id가 필요)   
+	// output: List<CardView>
+	public List<CardView> generateCardViewList(Integer userId) { // 비로그인도 타임라인은 보여지므로 null 가능
 		List<CardView> cardViewList = new ArrayList<>();
 		
 		// 글 목록을 가져온다. List<PostEntity>
@@ -55,16 +56,21 @@ public class TimelineBO {
 			card.setCommentList(commentViewList);
 			
 			// 좋아요 개수
-			int likeCount = likeBO.getLikeCount(post.getId());
+			int likeCount = likeBO.getLikeCountByPostId(post.getId());
 			card.setLikeCount(likeCount);
 			
-			// 좋아요 여부 채우기
-			int filledLike = likeBO.filledLike(post.getId(), post.getUserId());
-			if (filledLike > 0) {
-				card.setFilledLike(true);
-			} else {
-				card.setFilledLike(false);
-			}
+			// 좋아요 여부 채우기 - 구조적으로 더 나은 코드를 만들기 위해, if문은 LikeBO로 내림
+			card.setFilledLike(likeBO.filledLikeByPostIdUserId(post.getId(), userId));
+//			if (userId == null) {
+//				card.setFilledLike(false);
+//			} else {				
+//				int filledLike = likeBO.getLikeCountByPostIdUserId(post.getId(), userId);  // post.getUserId()는 글쓴사람의 유저ID, 내가 보고 싶은 값은 로그인한 사람의 ID
+//			}			
+//			if (filledLike > 0) {
+//				card.setFilledLike(true);
+//			} else {
+//				card.setFilledLike(false);
+//			}
 			
 			// !!!!!!!!!!!! 반드시 리스트에 넣는다
 			cardViewList.add(card);
