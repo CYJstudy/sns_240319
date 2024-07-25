@@ -11,6 +11,12 @@ public class LikeBO {
 	@Autowired
 	private LikeMapper likeMapper;
 	
+	// like삭제
+	// input: postId     output: X
+	public void deleteLikeByPostId(int postId) {
+		likeMapper.deleteLikeByPostIdUserId(postId, null);
+	}
+	
 	// post별 좋아요 갯수
 	// input: postId    output: int(좋아요개수)
 	public int getLikeCountByPostId(int postId) {

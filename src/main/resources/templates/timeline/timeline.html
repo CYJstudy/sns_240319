@@ -32,7 +32,7 @@
 					<span class="font-weight-bold" th:text="${cardView.user.loginId}">글쓴이</span>
 					
 					<!-- 더보기 ...(로그인 된 사람과 글쓴이 정보 일치할 때 보이게) -->
-					<a th:if="${session.userId == cardView.post.userId}" href="#" class="more-btn">
+					<a th:if="${session.userId == cardView.post.userId}" href="#" class="more-btn" th:data-post-id="${cardView.post.id}" data-toggle="modal" data-target="#modal">
 						<img src="https://www.iconninja.com/files/860/824/939/more-icon.png" width="30">
 					</a>
 				</div>
@@ -70,7 +70,7 @@
 						<span th:text="${commentView.comment.content}">댓글 내용임</span>
 						
 						<!-- 댓글 삭제(자신의 댓글만 가능) -->
-						<a href="#" class="comment-del-btn">
+						<a href="#" class="comment-del-btn" th:if="${session.userId == commentView.comment.userId}" th:data-user-id="${session.userId}" th:data-comment-id="${commentView.comment.id}">
 							<img src="https://www.iconninja.com/files/603/22/506/x-icon.png" width="10" height="10">
 						</a>
 					</div>
@@ -83,7 +83,22 @@
 				</div> <!-- 댓글 끝 -->
 			</div> <!-- 카드 끝 -->
 		</div> <!-- 타임라인 박스 끝 -->
-	</div>
+
+		<!-- Modal: 타임리프 레이아웃때문에 section태그 안쪽에 위치해야함(영역을 벗어나면 동작하지 않음) -->
+		<div class="modal fade" id="modal">
+			<!-- modal-sm: 작은 모달창, modal-dialog-centered: 수직기준 가운데 정렬 -->
+			<div class="modal-dialog modal-sm modal-dialog-centered">
+				<div class="modal-content text-center">
+					<div class="py-3">
+						<a href="#" id="postDeleteBtn">삭제하기</a>
+					</div>
+					<div class="py-3 border-top">
+						<a href="#" data-dismiss="modal">취소</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
 </section>
 
 <th:block layout:fragment="script">
@@ -232,6 +247,17 @@
 			
 		});
 		
+		// 댓글 삭제
+		$(".comment-del-btn").on('click', function(e) {
+			e.preventDefault();
+			//alert("댓글 삭제");
+			
+			let commentId = $(this).data('comment-id');
+			//alert(commentId);
+			
+			
+		});
+		
 		// 좋아요 버튼 누를때
 		$(".like-btn").on('click', function(e) {
 			e.preventDefault();
@@ -271,6 +297,41 @@
 				}
 				, error:function(e) {
 					alert("좋아요 누르기에 실패했습니다.");
+				}
+			});
+		});
+		
+		// 더보기(...) a 태그 클릭 => 모달 띄우기, 모달에 글번호 심어놓기
+		$(".more-btn").on('click', function(e) {
+			e.preventDefault(); // 화면이 위로 올라가는것을 방지
+			
+			let postId = $(this).data("post-id");  // getting
+			//alert(postId);
+			
+			// 1개만 존재하는 modal을 재활용하기 위해 data-post-id를 심어놓는다.
+			$("#modal").data('post-id', postId);  // setting
+			//alert($("#modal").data('post-id'));
+		});
+		
+		// 모달 안에 있는 '삭제하기' 클릭
+		$("#postDeleteBtn").on('click', function(e) {
+			e.preventDefault(); // a 태그 위로 올라감 방지
+			let postId = $("#modal").data("post-id");
+			//alert(postId);
+			
+			$.ajax({
+				type:"post"
+				, url:"/post/delete"
+				, data:{"postId":postId}
+				, success:function(data) {
+					if (data.result == "성공") {
+						location.reload();
+					} else {
+						alert(data.error_message);
+					}
+				}
+				, error:function(e) {
+					alert("포스트를 삭제하는데 실패했습니다.");
 				}
 			});
 		});
