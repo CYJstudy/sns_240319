@@ -45,15 +45,24 @@ public class CommentRestController {
 		return result;
 	}
 	
-	@DeleteMapping("/delete")
+	@PostMapping("/delete")
 	public Map<String, Object> delete(
-			@RequestParam("commentId") int commentId) {		
+			@RequestParam("commentId") int commentId,
+			HttpSession session) {		
+		
+		Integer userId = (Integer)session.getAttribute("userId");
+		Map<String, Object> result = new HashMap<>();
+		if (userId == null) {
+			result.put("code", 403);
+			result.put("error_message", "로그인을 해주세요.");
+			return result;
+		}
 		
 		// db delete
 		commentBO.deleteComment(commentId);
 		
 		// 응답값
-		Map<String, Object> result = new HashMap<>();
+//		Map<String, Object> result = new HashMap<>();
 		result.put("code", 200);
 		result.put("result", "성공");
 		return result;

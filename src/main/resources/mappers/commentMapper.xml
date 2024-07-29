@@ -42,7 +42,7 @@
  		FROM
  			`comment`
  		WHERE
- 			`commentId` = #{commentId}
+ 			`Id` = #{commentId}
  	</delete>
  	
  	 <delete id="deleteCommentByPostId" parameterType="int">

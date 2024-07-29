@@ -255,6 +255,24 @@
 			let commentId = $(this).data('comment-id');
 			//alert(commentId);
 			
+			$.ajax({
+				type:"post"
+				, url:"/comment/delete"
+				, data:{"commentId":commentId}
+				,success:function(data) {
+					if(data.code == 200){
+						location.reload(true);
+					} else if (data.code == 403) {
+						alert(data.error_message);
+						location.href="/user/sign-in-view";
+					} else {
+						alert(data.error_message);
+					}
+				}
+				,error:function(e) {
+					alert("댓글 삭제에 실패했습니다");
+				}
+			});
 			
 		});
 		
