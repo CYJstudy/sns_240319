@@ -318,6 +318,20 @@ ex) 카카오 로그인
 기획서, 깃허브 주소(레파지토리), DB설계
 
 개발 완료 9/2
-9/3 ~ 9/6 서버 세팅
-9/7 포트폴리오, 발표
-9/13 종강, 발표
+9/3, 9/4 AWS 서버 세팅
+9/5, 9/6, (주말) 9/9 포트폴리오 작성
+9/10 발표
+9/11 발표 및 종강
+
+-------------------------------------------
+2024-08-19 cache 관련
+local cache vs NoSQL(메모리 캐시)
+local cache
+ 서버가 켜져있는동안(WAS가 켜져있는 동안) 사용할 수 있는 캐시
+NoSQL(메모리 캐시) > key-value
+ 1) Memcached(SimpleMemcached)
+  - only memory
+  - multi thred
+ 2) Redis
+  - memory, disk
+  - single thread
